@@ -1,0 +1,9 @@
+.git-backup/
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+build/
+.DS_Store
+Thumbs.db
