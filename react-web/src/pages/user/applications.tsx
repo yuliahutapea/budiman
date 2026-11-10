@@ -275,7 +275,7 @@ export function ApplicationsPage() {
                     {app.status === "payment_pending" ? (
                       <Button
                         as={Link}
-                        to="/pembayaran"
+                        to={`/payment?id=${app.id}`}
                         className="bg-primary text-white font-bold rounded-xl py-6 shadow-md shadow-primary/20"
                         startContent={<CreditCard size={16} />}
                       >
