@@ -6,6 +6,7 @@ import { ApplicationType } from "../types/model/enum/ApplicationType";
 import { StudentStatus } from "../types/model/enum/StudentStatus";
 import { Application } from "../types/model/table/Application";
 import { User } from "../types/model/table/User";
+import { Admin } from "../types/model/table/Admin";
 import { UserApplicant } from "../types/model/table/UserApplicant";
 import { Between } from "typeorm";
 
@@ -14,7 +15,7 @@ export const adminGetUserApplicationsList: T_adminGetUserApplicationsList = asyn
     const where: any = {};
 
     if (req.query.id_user) {
-        const user = await User.findOneBy({
+        const user = await Admin.findOneBy({
             id: req.query.id_user,
         });
 
