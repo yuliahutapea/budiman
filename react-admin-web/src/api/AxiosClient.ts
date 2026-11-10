@@ -19,6 +19,7 @@ import { T_loginUser } from "./api/loginUser";
 import { T_verifyEmailRegistration } from "./api/verifyEmailRegistration";
 import { T_getProfile } from "./api/getProfile";
 import { T_userMakePayment } from "./api/userMakePayment";
+import { T_adminGetUserApplicantsList } from "./api/adminGetUserApplicantsList";
 
 export namespace AxiosClient {
 
@@ -123,6 +124,12 @@ export namespace AxiosClient {
     const final_url = __build_path(base_url, '/profile', {});
     return (await axios['get'](final_url, { headers: req.headers as any, })).data as any;
   }
+  export const adminGetUserApplicantsList: T_adminGetUserApplicantsList =
+    async (req, base_url: string = BaseURL.instance.base_url) => {
+      const final_url = __build_path(base_url, "/admin/applicants", {});
+      return (await axios["get"](final_url, { headers: req.headers as any }))
+        .data as any;
+    };
   export const userMakePayment: T_userMakePayment = async (req, base_url: string = BaseURL.instance.base_url) => {
     const final_url = __build_path(base_url, '/user/application/payment/:id', req.path);
     return (await axios['put'](final_url, req.body, { headers: req.headers as any, })).data as any;
