@@ -19,7 +19,7 @@ import { PaymentVerificationModal } from "../components/PaymentVerificationModal
 import { Application } from "../api/model/table/Application";
 
 // Extend the Application type to include the UI-specific full_name
-type ExtendedApplication = Application & { full_name: string };
+type ExtendedApplication = Application & { full_name: string; email: string };
 
 export function PembayaranPage() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -39,7 +39,7 @@ export function PembayaranPage() {
       });
 
       // 2. Ambil data applicants (Sama seperti di VerifikasiPage)
-      const applicantsRes = await AxiosClient.userGetUserApplicantsList({
+      const applicantsRes = await AxiosClient.adminGetUserApplicantsList({
         headers: { authorization: UserUtility.getAuthHeader() },
       });
 
@@ -57,8 +57,9 @@ export function PembayaranPage() {
           app.otm_id_user_applicant?.fullname ||
           app.parent_fullname ||
           "Unknown Student";
+        const updatedApp = { ...app, email: found!.email };
 
-        return { ...app, full_name };
+        return { ...updatedApp, full_name };
       });
 
       // 4. Filter antrean bayar
@@ -140,7 +141,7 @@ export function PembayaranPage() {
                         {row.full_name}
                       </span>
                       <span className="text-xs text-zinc-400 font-medium">
-                        {row.parent_email}
+                        {row.email}
                       </span>
                     </div>
                   </TableCell>
