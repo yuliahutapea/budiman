@@ -2,6 +2,7 @@ import axios from 'axios';
 import { T_adminGetUserApplicationsList } from "./api/adminGetUserApplicationsList";
 import { T_adminGetApplicationById } from "./api/adminGetApplicationById";
 import { T_adminVerifyApplicationById } from "./api/adminVerifyApplicationById";
+import { T_adminGetApplicantById } from "./api/adminGetApplicantById";
 import { T_loginAdmin } from "./api/loginAdmin";
 import { T_registerAdmin } from "./api/registerAdmin";
 import { T_adminVerifyPayment } from "./api/adminVerifyPayment";
@@ -56,6 +57,14 @@ export namespace AxiosClient {
     const final_url = __build_path(base_url, '/admin/application/:id', req.path);
     return (await axios['get'](final_url, { headers: req.headers as any, })).data as any;
   }
+  export const adminGetApplicantById: T_adminGetApplicantById = async (
+    req,
+    base_url: string = BaseURL.instance.base_url,
+  ) => {
+    const final_url = __build_path(base_url, "/admin/applicant/:id", req.path);
+    return (await axios["get"](final_url, { headers: req.headers as any }))
+      .data as any;
+  };  
   export const adminVerifyApplicationById: T_adminVerifyApplicationById = async (req, base_url: string = BaseURL.instance.base_url) => {
     const final_url = __build_path(base_url, '/admin/application/:id_application', req.path);
     return (await axios['put'](final_url, req.body, { headers: req.headers as any, })).data as any;
