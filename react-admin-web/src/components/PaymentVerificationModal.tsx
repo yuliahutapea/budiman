@@ -11,7 +11,7 @@ import {
   addToast,
 } from "@heroui/react";
 import { AxiosClient } from "../api/AxiosClient";
-import { UserUtility } from "../utils";
+import { base_url, UserUtility } from "../utils";
 import {
   CheckCircle,
   XCircle,
@@ -138,7 +138,11 @@ export function PaymentVerificationModal({
                     </Button> */}
                     <Button
                       as="a"
-                      href={proofUrl}
+                      href={
+                        base_url.replace(/\/$/, "") +
+                        proofUrl.replace(/\/$/, "")
+                      }
+                      target="_blank"
                       download
                       isIconOnly
                       className="bg-white text-secondary hover:bg-primary hover:text-white transition-colors"
