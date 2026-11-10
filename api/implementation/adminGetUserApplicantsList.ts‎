@@ -1,0 +1,14 @@
+import { getAdminFromAuthHeader } from "../jwt";
+import { T_adminGetUserApplicantsList } from "../types/api/adminGetUserApplicantsList";
+import { UserApplicant } from "../types/model/table/UserApplicant";
+
+export const adminGetUserApplicantsList: T_adminGetUserApplicantsList = async (
+  req,
+) => {
+  const admin = await getAdminFromAuthHeader(req.headers.authorization);
+  if (!admin) {
+    throw new Error("Not admin");
+  }
+  const list = await UserApplicant.find();
+  return list;
+};
