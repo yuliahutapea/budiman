@@ -22,7 +22,7 @@ import moment from "moment";
 import { ApplicationStatus } from "../api/model/enum/ApplicationStatus";
 
 // Extend the Application type to include the UI-specific full_name
-type ExtendedApplication = Application & { full_name: string };
+type ExtendedApplication = Application & { full_name: string; email: string };
 
 export function VerifikasiPage() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -42,7 +42,7 @@ export function VerifikasiPage() {
         query: { limit: 50, offset: 0 },
       });
 
-      const applicantsRes = await AxiosClient.userGetUserApplicantsList({
+      const applicantsRes = await AxiosClient.adminGetUserApplicantsList({
         headers: { authorization: UserUtility.getAuthHeader() },
       });
 
@@ -61,7 +61,8 @@ export function VerifikasiPage() {
             app.parent_email ||
             "Unknown Student";
 
-          return { ...app, full_name };
+          const updatedApp = { ...app, email: found!.email };
+          return { ...updatedApp, full_name };
         }
       );
 
@@ -200,7 +201,7 @@ export function VerifikasiPage() {
                         {row.full_name}
                       </span>
                       <span className="text-xs text-zinc-400 font-medium">
-                        {row.parent_email}
+                        {row.email}
                       </span>
                     </div>
                   </TableCell>
