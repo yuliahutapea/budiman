@@ -420,7 +420,7 @@ export function UserDetailsPage() {
                     href={
                       doc.url!.startsWith("http")
                         ? doc.url!
-                        : `${base_url}${doc.url}`
+                        : `${base_url.replace(/\/$/, "")}/${doc.url?.replace(/^\//, "")}`
                     }
                     target="_blank"
                     rel="noreferrer"
