@@ -135,7 +135,7 @@ export namespace AxiosClient {
   }
   export const adminGetUserApplicantsList: T_adminGetUserApplicantsList =
     async (req, base_url: string = BaseURL.instance.base_url) => {
-      const final_url = __build_path(base_url, "/admin/applicants", {});
+      const final_url = __build_path(base_url, "/admin/applications", {});
       return (await axios["get"](final_url, { headers: req.headers as any }))
         .data as any;
     };
